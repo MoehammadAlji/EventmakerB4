@@ -1,11 +1,11 @@
 export async function getAllEvents() {
   try {
-    const res = await fetch("https://eventmakers-api.fly.dev/events", {
-      method: "GET",
-      cache: "no-cache",
+    const res = await fetch('https://eventmakers-api.fly.dev/events', {
+      method: 'GET',
+      cache: 'no-cache',
     });
     if (!res.ok) {
-      throw new Error("Failed to get event data.");
+      throw new Error('Failed to get event data.');
     }
     const { data } = await res.json();
     return data.reverse();
@@ -18,12 +18,12 @@ export async function getDetailEvent(eventId) {
     const res = await fetch(
       `https://eventmakers-api.fly.dev/events/${eventId}`,
       {
-        method: "GET",
-        cache: "no-cache",
+        method: 'GET',
+        cache: 'no-cache',
       }
     );
     if (!res.ok) {
-      throw new Error("Failed to get data detail event.");
+      throw new Error('Failed to get data detail event.');
     }
     const { data } = await res.json();
     return { data, isLoading: false };
@@ -41,11 +41,11 @@ export async function getCreateEvent(
   dateTime
 ) {
   try {
-    const res = await fetch("https://eventmakers-api.fly.dev/events/", {
-      method: "POST",
-      cache: "no-cache",
+    const res = await fetch('https://eventmakers-api.fly.dev/events/', {
+      method: 'POST',
+      cache: 'no-cache',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -64,20 +64,20 @@ export async function getCreateEvent(
     }
     return data;
   } catch (error) {
-    console.error("Error creating event:", error);
-    throw new Error("Failed to create event. Please try again later.");
+    console.error('Error creating event:', error);
+    throw new Error('Failed to create event. Please try again later.');
   }
 }
 
 export async function uploadImageToCloudinary(imageFile) {
   const formData = new FormData();
-  formData.append("file", imageFile);
-  formData.append("upload_preset", process.env.CLOUDINARY_UPLOAD_PRESET);
+  formData.append('file', imageFile);
+  formData.append('upload_preset', 'xmncqgxf');
 
   const cloudinaryResponse = await fetch(
-    "https://api.cloudinary.com/v1_1/asdfghj/image/upload",
+    'https://api.cloudinary.com/v1_1/asdfghj/image/upload',
     {
-      method: "POST",
+      method: 'POST',
       body: formData,
     }
   );
@@ -85,13 +85,13 @@ export async function uploadImageToCloudinary(imageFile) {
   if (cloudinaryResponse.ok) {
     return await cloudinaryResponse.json();
   } else {
-    throw new Error("Gagal mengunggah gambar ke Cloudinary");
+    throw new Error('Gagal mengunggah gambar ke Cloudinary');
   }
 }
 
 export async function getDeleteEvent(token, eventId) {
   const res = await fetch(`https://eventmakers-api.fly.dev/events/${eventId}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -113,7 +113,7 @@ export async function getEditEvent(
   dateTime
 ) {
   console.log(
-    "PAY",
+    'PAY',
     token,
     author,
     eventId,
@@ -123,10 +123,10 @@ export async function getEditEvent(
     dateTime
   );
   const res = await fetch(`https://eventmakers-api.fly.dev/events/${eventId}`, {
-    method: "PATCH",
-    cache: "no-cache",
+    method: 'PATCH',
+    cache: 'no-cache',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
@@ -137,10 +137,10 @@ export async function getEditEvent(
       author,
     }),
   });
-  console.log("BODY", title, description, image, dateTime, author);
+  console.log('BODY', title, description, image, dateTime, author);
 
   const data = await res.json();
-  console.log("DATT", data);
+  console.log('DATT', data);
 
   if (!res.ok) {
     throw new Error(data.message);
