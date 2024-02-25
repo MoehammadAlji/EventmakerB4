@@ -1,11 +1,9 @@
-import Image from "next/image";
-import { Register } from "@/components/auth/component/register";
-import { Login } from "@/components/auth/component/login";
+import { Landingpage } from "@/components/Landingpage";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <Login />
+    <div>
+      <Landingpage />
+    </div>
   );
 }
-
- 
